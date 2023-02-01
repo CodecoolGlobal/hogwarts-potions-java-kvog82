@@ -1,6 +1,6 @@
-package com.codecool.hogwartshouses.data_sample;
+package com.codecool.hogwartshouses.x_data_sample;
 
-import com.codecool.hogwartshouses.service.DAO.RoomMemory;
+import com.codecool.hogwartshouses.service.x_DAO.RoomMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

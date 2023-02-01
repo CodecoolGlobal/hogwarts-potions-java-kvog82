@@ -1,6 +1,6 @@
-package com.codecool.hogwartshouses.service.DAO;
+package com.codecool.hogwartshouses.service.x_DAO;
 
-import com.codecool.hogwartshouses.model.Room;
+import com.codecool.hogwartshouses.persistence.entity.Room;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;

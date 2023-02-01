@@ -1,4 +1,4 @@
-package com.codecool.hogwartshouses.model;
+package com.codecool.hogwartshouses.persistence.entity;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Builder
-public class Room {
+public class Student {
 
 }
