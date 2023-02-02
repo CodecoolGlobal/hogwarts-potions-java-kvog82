@@ -1,7 +1,9 @@
 package com.codecool.hogwartshouses.runner;
 
 import com.codecool.hogwartshouses.persistence.entity.Room;
+import com.codecool.hogwartshouses.persistence.entity.Student;
 import com.codecool.hogwartshouses.persistence.repository.RoomRepository;
+import com.codecool.hogwartshouses.persistence.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
@@ -19,14 +21,21 @@ public class DatabaseLoader {
 
     private List<Room> rooms;
 
+    private List<Student> students;
+
     @Bean
-    ApplicationRunner initDatabase(RoomRepository roomRepository) {
+    ApplicationRunner initDatabase(RoomRepository roomRepository, StudentRepository studentRepository) {
         return args -> {
             roomRepository.saveAll(rooms);
+            studentRepository.saveAll(students);
         };
     }
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
