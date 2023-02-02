@@ -2,9 +2,8 @@ package com.codecool.hogwartshouses.service;
 
 import com.codecool.hogwartshouses.persistence.entity.Room;
 import com.codecool.hogwartshouses.persistence.repository.RoomRepository;
-import com.codecool.hogwartshouses.service.x_DAO.RoomDAO;
+import com.codecool.hogwartshouses.service.exception.RoomNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,5 +16,32 @@ public class RoomService {
 
     public List<Room> findAll() {
         return roomRepository.findAll();
+    }
+
+    public Room save(Room room) {
+        return roomRepository.save(room);
+    }
+
+    public Room findById(Long id) {
+        return roomRepository.findById(id)
+                .orElseThrow(() -> new RoomNotFoundException(id));
+    }
+
+    public void deleteById(Long id) {
+        roomRepository.deleteById(id);
+    }
+
+    public Room update(Long id, Room newRoom) {
+        return roomRepository.findById(id)
+                .map(room -> {
+                    room.setNumber(newRoom.getNumber());
+                    room.setHouse(newRoom.getHouse());
+                    room.setStudents(newRoom.getStudents());
+                    return roomRepository.save(room);
+                })
+                .orElseGet(() -> {
+                    newRoom.setId(id);
+                    return roomRepository.save(newRoom);
+                });
     }
 }

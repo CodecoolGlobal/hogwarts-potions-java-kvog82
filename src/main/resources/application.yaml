@@ -9,5 +9,12 @@ datasets:
       house: HUFFLEPUFF
     - number: 3
       house: RAVENCLAW
-    - number: 4
-      house: SLYTHERIN
+  students:
+    - name: "Harry Potter"
+      pet: OWL
+    - name: "Luna"
+      pet: RAT
+    - name: "Ron Weasley"
+      pet: NONE
+    - name: "Hermine Granger"
+      pet: CAT
