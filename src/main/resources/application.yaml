@@ -13,7 +13,7 @@ datasets:
     - name: "Harry Potter"
       pet: OWL
     - name: "Ron Weasley"
-      pet: NONE
+      pet: OWL
     - name: "Hermine Granger"
       pet: CAT
     - name: "Draco Malfoy"

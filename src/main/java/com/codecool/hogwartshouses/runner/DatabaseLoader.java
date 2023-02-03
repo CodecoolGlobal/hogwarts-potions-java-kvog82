@@ -7,7 +7,6 @@ import com.codecool.hogwartshouses.persistence.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +27,21 @@ public class DatabaseLoader {
         return args -> {
             roomRepository.saveAll(rooms);
             studentRepository.saveAll(students);
+
+            Room room1 = rooms.get(0);
+            Room room2 = rooms.get(1);
+
+            Student harry = students.get(0);
+            Student ron = students.get(1);
+            Student hermine = students.get(2);
+            Student draco = students.get(3);
+
+            room1.setStudents(List.of(harry, ron, hermine));
+            room2.setStudents(List.of(draco));
+
+            roomRepository.saveAll(List.of(room1, room2));
+
+
         };
     }
 

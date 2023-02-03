@@ -37,4 +37,14 @@ public class RoomController {
     void deleteRoom(@PathVariable Long id) {
         roomService.deleteById(id);
     }
+
+    @GetMapping("rooms/available")
+    List<Room> findAvailableRooms() {
+        return roomService.findEmptyRooms();
+    }
+
+    @GetMapping("rooms/rat-owners")
+    List<Room> findRoomsForRatOwners() {
+        return roomService.findRatOwnersRooms();
+    }
 }

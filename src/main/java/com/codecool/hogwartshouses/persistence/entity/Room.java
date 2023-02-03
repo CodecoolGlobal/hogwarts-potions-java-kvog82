@@ -21,12 +21,12 @@ import java.util.Set;
 @Builder
 public class Room {
 
-    private @Id @GeneratedValue Long id;
+    private @Id
+    @GeneratedValue Long id;
     private int number;
     private House house;
     @OneToMany
     private List<Student> students;
-
 
 
 }

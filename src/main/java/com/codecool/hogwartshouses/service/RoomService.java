@@ -1,6 +1,7 @@
 package com.codecool.hogwartshouses.service;
 
 import com.codecool.hogwartshouses.persistence.entity.Room;
+import com.codecool.hogwartshouses.persistence.entity.types.Pet;
 import com.codecool.hogwartshouses.persistence.repository.RoomRepository;
 import com.codecool.hogwartshouses.service.exception.RoomNotFoundException;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,7 @@ public class RoomService {
     }
 
     public Room findById(Long id) {
-        return roomRepository.findById(id)
-                .orElseThrow(() -> new RoomNotFoundException(id));
+        return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
     }
 
     public void deleteById(Long id) {
@@ -32,16 +32,23 @@ public class RoomService {
     }
 
     public Room update(Long id, Room newRoom) {
-        return roomRepository.findById(id)
-                .map(room -> {
-                    room.setNumber(newRoom.getNumber());
-                    room.setHouse(newRoom.getHouse());
-                    room.setStudents(newRoom.getStudents());
-                    return roomRepository.save(room);
-                })
-                .orElseGet(() -> {
-                    newRoom.setId(id);
-                    return roomRepository.save(newRoom);
-                });
+        return roomRepository.findById(id).map(room -> {
+            room.setNumber(newRoom.getNumber());
+            room.setHouse(newRoom.getHouse());
+            room.setStudents(newRoom.getStudents());
+            return roomRepository.save(room);
+        }).orElseGet(() -> {
+            newRoom.setId(id);
+            return roomRepository.save(newRoom);
+        });
+    }
+
+    public List<Room> findEmptyRooms() {
+        return roomRepository.findByStudentsIsNull();
+    }
+
+    public List<Room> findRatOwnersRooms() {
+        return roomRepository.findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List.of(Pet.OWL, Pet.CAT));
+
     }
 }
