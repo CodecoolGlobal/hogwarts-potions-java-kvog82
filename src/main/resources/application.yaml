@@ -1,20 +1,3 @@
 spring:
   banner:
     location: classpath:hogwarts-banner.txt
-datasets:
-  rooms:
-    - number: 1
-      house: GRYFFINDOR
-    - number: 2
-      house: HUFFLEPUFF
-    - number: 3
-      house: RAVENCLAW
-  students:
-    - name: "Harry Potter"
-      pet: OWL
-    - name: "Ron Weasley"
-      pet: OWL
-    - name: "Hermine Granger"
-      pet: CAT
-    - name: "Draco Malfoy"
-      pet: RAT
