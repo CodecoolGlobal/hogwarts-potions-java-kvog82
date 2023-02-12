@@ -1,6 +1,6 @@
 package com.codecool.hogwartshouses.persistence.entity;
 
-import lombok.AllArgsConstructor;
+import com.codecool.hogwartshouses.persistence.entity.types.BrewingStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +12,16 @@ import java.util.List;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Recipe {
+public class Potion {
     @Id @GeneratedValue
     private long id;
     private String name;
     @OneToOne
-    private Student brewer;
+    private Student brewingStudent;
     @OneToMany
     List<Ingredient> ingredients;
+    @Enumerated(value = EnumType.STRING)
+    private BrewingStatus brewingStatus;
+    @OneToOne
+    private Recipe recipe;
 }
