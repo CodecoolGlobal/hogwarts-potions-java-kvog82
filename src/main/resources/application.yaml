@@ -1,3 +1,36 @@
+server:
+  port: 8080
 spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    username: xxx
+#    password: xxx
+#    url: jdbc:postgresql://localhost:5432/hogwarts
+#    platform: postgres
+#    initialization-mode: always
+#    continue-on-error: true
+#    jpa:
+#      show-sql: true
+#      generate-ddl: true
+#      hibernate:
+#        ddl-auto: create-drop
+#      database: postgresql
   banner:
     location: classpath:hogwarts-banner.txt
+datasets:
+  rooms:
+    - number: 1
+      house: GRYFFINDOR
+    - number: 2
+      house: HUFFLEPUFF
+    - number: 3
+      house: RAVENCLAW
+  students:
+    - name: "Harry Potter"
+      pet: OWL
+    - name: "Ron Weasley"
+      pet: NONE
+    - name: "Hermine Granger"
+      pet: CAT
+    - name: "Draco Malfoy"
+      pet: RAT

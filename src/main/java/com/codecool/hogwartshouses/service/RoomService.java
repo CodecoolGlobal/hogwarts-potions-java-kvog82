@@ -48,7 +48,7 @@ public class RoomService {
     }
 
     public List<Room> findRatOwnersRooms() {
-        return roomRepository.findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List.of(Pet.OWL, Pet.CAT));
-
+//        return roomRepository.findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List.of(Pet.OWL, Pet.CAT));
+        return roomRepository.findByStudentsPetNotIn(List.of(Pet.OWL, Pet.CAT));
     }
 }

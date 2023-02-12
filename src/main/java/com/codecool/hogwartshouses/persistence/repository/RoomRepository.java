@@ -9,6 +9,10 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByStudentsIsNull();
 
-    List<Room> findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List<Pet> petsToExclude);
+//    List<Room> findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List<Pet> petsToExclude);
+    List<Room> findByStudentsPetNotIn(List<Pet> petsToExclude);
+
+
+
 
 }
