@@ -1,16 +1,16 @@
 package com.codecool.hogwartshouses.persistence.entity;
 
 import com.codecool.hogwartshouses.persistence.entity.types.BrewingStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 public class Potion {
     @Id @GeneratedValue
