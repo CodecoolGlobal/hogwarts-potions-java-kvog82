@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Builder
 public class Student {
     private @Id
-    @GeneratedValue Long id;
+    @GeneratedValue long id;
     private String name;
     private Pet pet;
 }

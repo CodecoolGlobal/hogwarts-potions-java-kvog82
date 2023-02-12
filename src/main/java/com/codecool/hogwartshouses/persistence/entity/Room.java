@@ -22,7 +22,7 @@ import java.util.Set;
 public class Room {
 
     private @Id
-    @GeneratedValue Long id;
+    @GeneratedValue long id;
     private int number;
     private House house;
     @OneToMany
