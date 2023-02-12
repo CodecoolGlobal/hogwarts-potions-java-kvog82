@@ -53,5 +53,3 @@ datasets:
     - name: "Healing"
   potions:
     - name: "Strength Potion"
-    - name: "Healing Potion"
-    - name: "Growth Potion"

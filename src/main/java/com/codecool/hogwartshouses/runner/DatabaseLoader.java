@@ -65,6 +65,8 @@ public class DatabaseLoader {
                     ingredients.get(3), ingredients.get(4)));
             strengthPotion.setBrewingStatus(BrewingStatus.DISCOVERY);
             strengthPotion.setRecipe(strength);
+
+            potionRepository.saveAll(List.of(strengthPotion));
         };
     }
 
