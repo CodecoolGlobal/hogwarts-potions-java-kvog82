@@ -34,3 +34,24 @@ datasets:
       pet: CAT
     - name: "Draco Malfoy"
       pet: RAT
+  ingredients:
+    - name: "Unicorn hair"
+    - name: "Venomous Tentacula"
+    - name: "Mandrake"
+    - name: "Shrivelfig"
+    - name: "Fluxweed"
+    - name: "Horklump Juice"
+    - name: "Dittany"
+    - name: "Alcohol"
+    - name: "Frog brain"
+    - name: "Beetle"
+    - name: "Griffin claw"
+    - name: "Knotgrass"
+    - name: "Mushroom"
+  recipes:
+    - name: "Strength"
+    - name: "Healing"
+  potions:
+    - name: "Strength Potion"
+    - name: "Healing Potion"
+    - name: "Growth Potion"

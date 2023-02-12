@@ -1,9 +1,8 @@
 package com.codecool.hogwartshouses.runner;
 
-import com.codecool.hogwartshouses.persistence.entity.Room;
-import com.codecool.hogwartshouses.persistence.entity.Student;
-import com.codecool.hogwartshouses.persistence.repository.RoomRepository;
-import com.codecool.hogwartshouses.persistence.repository.StudentRepository;
+import com.codecool.hogwartshouses.persistence.entity.*;
+import com.codecool.hogwartshouses.persistence.entity.types.BrewingStatus;
+import com.codecool.hogwartshouses.persistence.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
@@ -19,14 +18,21 @@ public class DatabaseLoader {
     private static final Logger log = LoggerFactory.getLogger(DatabaseLoader.class);
 
     private List<Room> rooms;
-
     private List<Student> students;
+    private List<Ingredient> ingredients;
+    private List<Recipe> recipes;
+    private List<Potion> potions;
 
     @Bean
-    ApplicationRunner initDatabase(RoomRepository roomRepository, StudentRepository studentRepository) {
+    ApplicationRunner initDatabase(RoomRepository roomRepository, StudentRepository studentRepository,
+                                   IngredientRepository ingredientRepository, RecipeRepository recipeRepository,
+                                   PotionRepository potionRepository) {
         return args -> {
             roomRepository.saveAll(rooms);
             studentRepository.saveAll(students);
+            ingredientRepository.saveAll(ingredients);
+            recipeRepository.saveAll(recipes);
+            potionRepository.saveAll(potions);
 
             Room room1 = rooms.get(0);
             Room room2 = rooms.get(1);
@@ -41,7 +47,24 @@ public class DatabaseLoader {
 
             roomRepository.saveAll(List.of(room1, room2));
 
+            Recipe strength = recipes.get(0);
+            strength.setBrewer(harry);
+            strength.setIngredients(List.of(ingredients.get(0), ingredients.get(1), ingredients.get(2),
+                    ingredients.get(3), ingredients.get(4)));
 
+            Recipe healing = recipes.get(1);
+            healing.setBrewer(ron);
+            healing.setIngredients(List.of(ingredients.get(5), ingredients.get(6), ingredients.get(7),
+                    ingredients.get(8), ingredients.get(9)));
+
+            recipeRepository.saveAll(List.of(strength, healing));
+
+            Potion strengthPotion = potions.get(0);
+            strengthPotion.setBrewingStudent(harry);
+            strengthPotion.setIngredients(List.of(ingredients.get(0), ingredients.get(1), ingredients.get(2),
+                    ingredients.get(3), ingredients.get(4)));
+            strengthPotion.setBrewingStatus(BrewingStatus.DISCOVERY);
+            strengthPotion.setRecipe(strength);
         };
     }
 
@@ -51,5 +74,17 @@ public class DatabaseLoader {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public void setPotions(List<Potion> potions) {
+        this.potions = potions;
     }
 }
