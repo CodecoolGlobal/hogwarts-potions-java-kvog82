@@ -6,6 +6,7 @@ import com.codecool.hogwartshouses.service.PotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,5 +29,11 @@ public class PotionController {
     @GetMapping("/{studentId}")
     List<Potion> getPotionsForStudent(@PathVariable long studentId) {
         return potionService.findAllByStudentId(studentId);
+    }
+
+    @PostMapping("/brew")
+    Potion createNewPotion(@RequestBody long studentId) {
+        NewPotion newPotion = new NewPotion(studentId, new ArrayList<>());
+        return potionService.addPotion(newPotion);
     }
 }
