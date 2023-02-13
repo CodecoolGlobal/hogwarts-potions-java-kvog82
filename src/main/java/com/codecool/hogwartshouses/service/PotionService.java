@@ -31,22 +31,36 @@ public class PotionService {
 
     public Potion addPotion(NewPotion newPotion) {
         Potion potion = new Potion();
+        setBrewingStudent(newPotion, potion);
+        checkIngredientsAndSaveIfNew(newPotion, potion);
+        checkStatusAndSavePotion(potion);
+        return potion;
+    }
 
+    private void setBrewingStudent(NewPotion newPotion, Potion potion) {
         long brewingStudentId = newPotion.getBrewingStudentId();
         Student brewingStudent = studentRepository.findById(brewingStudentId)
                 .orElseThrow(() -> new StudentNotFoundException(brewingStudentId));
         potion.setBrewingStudent(brewingStudent);
+    }
 
+    private void checkIngredientsAndSaveIfNew(NewPotion newPotion, Potion potion) {
         List<Ingredient> potionIngredients = newPotion.getIngredients();
         for (Ingredient potionIngredient : potionIngredients) {
-            potionIngredient.setId(ingredientRepository.findByName(potionIngredient.getName()).getId());
-            System.out.println("potionIngredient = " + potionIngredient);
-            if (potionIngredient == null) {
-                potionIngredient = ingredientRepository.save(new Ingredient(0, potionIngredient.getName()));
+            try {
+                potionIngredient.setId(ingredientRepository.findByName(potionIngredient.getName()).getId());
+            } catch (NullPointerException e) {
+                Ingredient ingredient = new Ingredient(0, potionIngredient.getName());
+                ingredient = ingredientRepository.save(ingredient);
+                potionIngredient.setId(ingredient.getId());
             }
         }
         potion.setIngredients(potionIngredients);
-        System.out.println("potionIngredients = " + potionIngredients);
+    }
+
+    private void checkStatusAndSavePotion(Potion potion) {
+        List<Ingredient> potionIngredients = potion.getIngredients();
+        Student brewingStudent = potion.getBrewingStudent();
         if (potionIngredients.size() < 5) {
             potion.setBrewingStatus(BrewingStatus.BREW);
         } else {
@@ -58,18 +72,22 @@ public class PotionService {
                 savePotion(potion, brewingStudent, existingRecipe);
             }
         }
-        potionRepository.save(potion);
-        return potion;
     }
 
-    private static void savePotion(Potion potion, Student brewingStudent, Recipe existingRecipe) {
-        potion.setBrewingStatus(BrewingStatus.REPLICA);
-        potion.setRecipe(existingRecipe);
-        potion.setName(brewingStudent.getName() + "'s Potion after " + existingRecipe.getName());
+    private Recipe getExistingRecipe(List<Ingredient> potionIngredients, List<Recipe> allRecipes) {
+        Recipe existingRecipe = null;
+        for (Recipe recipe : allRecipes) {
+            List<Ingredient> recipeIngredients = recipe.getIngredients();
+            if (potionIngredients.size() == recipeIngredients.size()
+                    && new HashSet<>(potionIngredients).containsAll(recipeIngredients)) {
+                existingRecipe = recipe;
+            }
+        }
+        return existingRecipe;
     }
 
     private void savePotionAndNewDiscoveryRecipe(Potion potion, Student brewingStudent,
-                                                        List<Ingredient> potionIngredients, List<Recipe> allRecipes) {
+                                                 List<Ingredient> potionIngredients, List<Recipe> allRecipes) {
         int discoveryCount = 1;
         for (Recipe recipe : allRecipes) {
             if (recipe.getBrewer().equals(brewingStudent)) {
@@ -81,17 +99,13 @@ public class PotionService {
         potion.setBrewingStatus(BrewingStatus.DISCOVERY);
         potion.setRecipe(newRecipe);
         potion.setName(brewingStudent.getName() + "'s Potion");
+        potionRepository.save(potion);
     }
 
-    private static Recipe getExistingRecipe(List<Ingredient> potionIngredients, List<Recipe> allRecipes) {
-        Recipe existingRecipe = null;
-        for (Recipe recipe : allRecipes) {
-            List<Ingredient> recipeIngredients = recipe.getIngredients();
-            if (potionIngredients.size() == recipeIngredients.size()
-                    && new HashSet<>(potionIngredients).containsAll(recipeIngredients)) {
-                existingRecipe = recipe;
-            }
-        }
-        return existingRecipe;
+    private void savePotion(Potion potion, Student brewingStudent, Recipe existingRecipe) {
+        potion.setBrewingStatus(BrewingStatus.REPLICA);
+        potion.setRecipe(existingRecipe);
+        potion.setName(brewingStudent.getName() + "'s Potion after " + existingRecipe.getName());
+        potionRepository.save(potion);
     }
 }
