@@ -18,10 +18,10 @@ public class Potion {
     private String name;
     @OneToOne
     private Student brewingStudent;
-    @OneToMany
+    @ManyToMany
     List<Ingredient> ingredients;
     @Enumerated(value = EnumType.STRING)
     private BrewingStatus brewingStatus;
-    @OneToOne
+    @ManyToOne
     private Recipe recipe;
 }

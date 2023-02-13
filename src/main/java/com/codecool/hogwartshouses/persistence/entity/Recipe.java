@@ -17,6 +17,6 @@ public class Recipe {
     private String name;
     @OneToOne
     private Student brewer;
-    @OneToMany
+    @ManyToMany
     List<Ingredient> ingredients;
 }

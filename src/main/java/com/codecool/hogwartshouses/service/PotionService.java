@@ -6,6 +6,7 @@ import com.codecool.hogwartshouses.persistence.entity.Potion;
 import com.codecool.hogwartshouses.persistence.entity.Recipe;
 import com.codecool.hogwartshouses.persistence.entity.Student;
 import com.codecool.hogwartshouses.persistence.entity.types.BrewingStatus;
+import com.codecool.hogwartshouses.persistence.repository.IngredientRepository;
 import com.codecool.hogwartshouses.persistence.repository.PotionRepository;
 import com.codecool.hogwartshouses.persistence.repository.RecipeRepository;
 import com.codecool.hogwartshouses.persistence.repository.StudentRepository;
@@ -22,6 +23,7 @@ public class PotionService {
     private PotionRepository potionRepository;
     private StudentRepository studentRepository;
     private RecipeRepository recipeRepository;
+    private IngredientRepository ingredientRepository;
 
     public List<Potion> findAll() {
         return potionRepository.findAll();
@@ -36,8 +38,15 @@ public class PotionService {
         potion.setBrewingStudent(brewingStudent);
 
         List<Ingredient> potionIngredients = newPotion.getIngredients();
+        for (Ingredient potionIngredient : potionIngredients) {
+            potionIngredient.setId(ingredientRepository.findByName(potionIngredient.getName()).getId());
+            System.out.println("potionIngredient = " + potionIngredient);
+            if (potionIngredient == null) {
+                potionIngredient = ingredientRepository.save(new Ingredient(0, potionIngredient.getName()));
+            }
+        }
         potion.setIngredients(potionIngredients);
-
+        System.out.println("potionIngredients = " + potionIngredients);
         if (potionIngredients.size() < 5) {
             potion.setBrewingStatus(BrewingStatus.BREW);
         } else {
@@ -49,6 +58,7 @@ public class PotionService {
                 savePotion(potion, brewingStudent, existingRecipe);
             }
         }
+        potionRepository.save(potion);
         return potion;
     }
 
@@ -58,7 +68,7 @@ public class PotionService {
         potion.setName(brewingStudent.getName() + "'s Potion after " + existingRecipe.getName());
     }
 
-    private static void savePotionAndNewDiscoveryRecipe(Potion potion, Student brewingStudent,
+    private void savePotionAndNewDiscoveryRecipe(Potion potion, Student brewingStudent,
                                                         List<Ingredient> potionIngredients, List<Recipe> allRecipes) {
         int discoveryCount = 1;
         for (Recipe recipe : allRecipes) {
@@ -66,8 +76,8 @@ public class PotionService {
                 discoveryCount++;
             }
         }
-        Recipe newRecipe = new Recipe(0, brewingStudent.getName() +
-                "'s discovery # " + discoveryCount, brewingStudent, potionIngredients);
+        Recipe newRecipe = recipeRepository.save(new Recipe(0, brewingStudent.getName() +
+                "'s discovery # " + discoveryCount, brewingStudent, potionIngredients));
         potion.setBrewingStatus(BrewingStatus.DISCOVERY);
         potion.setRecipe(newRecipe);
         potion.setName(brewingStudent.getName() + "'s Potion");
