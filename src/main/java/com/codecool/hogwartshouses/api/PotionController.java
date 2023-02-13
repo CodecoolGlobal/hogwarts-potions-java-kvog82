@@ -24,4 +24,9 @@ public class PotionController {
     Potion addPotion(@RequestBody NewPotion newPotion) {
         return potionService.addPotion(newPotion);
     }
+
+    @GetMapping("/{studentId}")
+    List<Potion> getPotionsForStudent(@PathVariable long studentId) {
+        return potionService.findAllByStudentId(studentId);
+    }
 }

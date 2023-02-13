@@ -108,4 +108,8 @@ public class PotionService {
         potion.setName(brewingStudent.getName() + "'s Potion after " + existingRecipe.getName());
         potionRepository.save(potion);
     }
+
+    public List<Potion> findAllByStudentId(long studentId) {
+        return potionRepository.findAllByBrewingStudentId(studentId);
+    }
 }
