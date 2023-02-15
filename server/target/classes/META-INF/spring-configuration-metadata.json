@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "datasets",
+      "type": "com.codecool.hogwartshouses.runner.DatabaseLoader",
+      "sourceType": "com.codecool.hogwartshouses.runner.DatabaseLoader"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
