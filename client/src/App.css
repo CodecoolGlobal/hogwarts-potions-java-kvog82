@@ -1,4 +1,12 @@
 .App {
+  font-family: 'Pangolin', cursive;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(47, 47, 66);
   text-align: center;
   background-image: url("http://localhost:8080/get-background-image");
   background-size: "cover";
@@ -19,18 +27,8 @@
   }
 }
 
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(32, 6, 6);
-}
-
 .App-link {
-  color: #61dafb;
+  color: #488a9c;
 }
 
 @keyframes App-logo-spin {
@@ -40,4 +38,97 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.i1 {
+  --i: 1;
+}
+
+.i2 {
+  --i: 2;
+}
+.i3 {
+  --i: 3;
+}
+.i4 {
+  --i: 4;
+}
+.i5 {
+  --i: 5;
+}
+.i6 {
+  --i: 6;
+}
+.i7 {
+  --i: 7;
+}
+
+.waviy {
+  position: relative;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-size: 60px;
+  font-weight: bold;
+  color: rgb(47, 47, 66);
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(.2s * var(--i));
+  animation-duration: 20s;
+}
+
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content-left {
+  grid-area: content-left;
+}
+
+.content-right {
+  grid-area: content-right;
+}
+
+.header {
+  grid-area: header;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+
+.wrapper {
+  width: 90%;
+  height: 80%;
+  border-style: dashed;
+  border-color: aqua;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 20% 50% auto;
+  grid-template-rows: 15% auto 10%;
+  grid-template-areas:
+             "....... header  header"
+             "sidebar content-left content-right"
+             "footer footer footer";
+  color: #444;
+}
+
+.box {
+background-color: #38385f85;
+color: #fff;
+border-radius: 5px;
+padding: 10px;
+
+}
+
+.header, .footer {
+background-color: #28284485;
 }
