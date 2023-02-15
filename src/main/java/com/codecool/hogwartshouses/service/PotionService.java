@@ -15,6 +15,7 @@ import com.codecool.hogwartshouses.service.exception.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,6 +39,10 @@ public class PotionService {
         return potion;
     }
 
+    public List<Potion> findAllByStudentId(long studentId) {
+        return potionRepository.findAllByBrewingStudentId(studentId);
+    }
+
     public Potion addIngredient(long potionId, Ingredient ingredient) {
         Potion potion = potionRepository.findById(potionId).orElseThrow(() -> new PotionNotFoundException(potionId));
         List<Ingredient> existingIngredients = potion.getIngredients();
@@ -47,6 +52,21 @@ public class PotionService {
         potion.setIngredients(existingIngredients);
         checkStatusAndSavePotion(potion);
         return potion;
+    }
+
+    public List<Recipe> getRecipesWithBrewingPotionIngredients(long potionId) { // TODO create query in RecipeRepository
+        Potion potion = potionRepository.findById(potionId).orElseThrow(() -> new PotionNotFoundException(potionId));
+        List<Ingredient> potionIngredients = potion.getIngredients();
+        List<Recipe> allRecipes = recipeRepository.findAll();
+        List<Recipe> recipesWithIngredients = new ArrayList<>();
+        for (Recipe recipe : allRecipes) {
+            List<Ingredient> recipeIngredients = recipe.getIngredients();
+            if(new HashSet<>(recipeIngredients).containsAll(potionIngredients)) {
+                recipesWithIngredients.add(recipe);
+            }
+        }
+        System.out.println("recipes = " + recipesWithIngredients);
+        return recipesWithIngredients;
     }
 
     private void setBrewingStudent(NewPotion newPotion, Potion potion) {
@@ -120,10 +140,6 @@ public class PotionService {
         potion.setRecipe(existingRecipe);
         potion.setName(brewingStudent.getName() + "'s Potion after " + existingRecipe.getName());
         potionRepository.save(potion);
-    }
-
-    public List<Potion> findAllByStudentId(long studentId) {
-        return potionRepository.findAllByBrewingStudentId(studentId);
     }
 
 }

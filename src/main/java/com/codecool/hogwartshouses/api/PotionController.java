@@ -3,6 +3,7 @@ package com.codecool.hogwartshouses.api;
 import com.codecool.hogwartshouses.api.payload.NewPotion;
 import com.codecool.hogwartshouses.persistence.entity.Ingredient;
 import com.codecool.hogwartshouses.persistence.entity.Potion;
+import com.codecool.hogwartshouses.persistence.entity.Recipe;
 import com.codecool.hogwartshouses.service.PotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,10 @@ public class PotionController {
     @PutMapping("/{potionId}/add")
     Potion addIngredient(@PathVariable long potionId, @RequestBody Ingredient ingredient) {
         return potionService.addIngredient(potionId, ingredient);
+    }
+
+    @GetMapping("/{potionId}/help")
+    List<Recipe> getRecipesWithBrewingPotionIngredients(@PathVariable long potionId) {
+        return potionService.getRecipesWithBrewingPotionIngredients(potionId);
     }
 }
