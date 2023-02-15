@@ -47,7 +47,7 @@ public class RoomService {
         return roomRepository.findByStudentsIsNull();
     }
 
-    public List<Room> findRatOwnersRooms() {
+    public List<Room> findRatOwnersRooms() { // TODO correct query
 //        return roomRepository.findByStudentsIsNullOrStudentsNotNullAndStudents_PetNotIn(List.of(Pet.OWL, Pet.CAT));
         return roomRepository.findByStudentsPetNotIn(List.of(Pet.OWL, Pet.CAT));
     }

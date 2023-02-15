@@ -8,42 +8,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("rooms")
+@CrossOrigin("http://localhost:3000")
 @RequiredArgsConstructor
 public class RoomController {
 
     private final RoomService roomService;
 
-    @GetMapping("rooms")
+    @GetMapping
     List<Room> getRooms() {
         return roomService.findAll();
     }
 
-    @PostMapping("rooms")
+    @PostMapping
     Room addRoom(@RequestBody Room room) {
         return roomService.save(room);
     }
 
-    @GetMapping("rooms/{id}")
+    @GetMapping("/{id}")
     Room findRoom(@PathVariable Long id) {
         return roomService.findById(id);
     }
 
-    @PutMapping("rooms/{id}")
+    @PutMapping("/{id}")
     Room updateRoom(@PathVariable Long id, @RequestBody Room room) {
         return roomService.update(id, room);
     }
 
-    @DeleteMapping("rooms/{id}")
+    @DeleteMapping("/{id}")
     void deleteRoom(@PathVariable Long id) {
         roomService.deleteById(id);
     }
 
-    @GetMapping("rooms/available")
+    @GetMapping("/available")
     List<Room> findAvailableRooms() {
         return roomService.findEmptyRooms();
     }
 
-    @GetMapping("rooms/rat-owners")
+    @GetMapping("/rat-owners")
     List<Room> findRoomsForRatOwners() {
         return roomService.findRatOwnersRooms();
     }

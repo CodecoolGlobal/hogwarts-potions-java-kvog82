@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("potions")
+@CrossOrigin("http://localhost:3000")
 @RequiredArgsConstructor
 public class PotionController {
 

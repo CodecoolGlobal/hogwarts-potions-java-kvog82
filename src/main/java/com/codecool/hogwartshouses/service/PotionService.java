@@ -65,7 +65,6 @@ public class PotionService {
                 recipesWithIngredients.add(recipe);
             }
         }
-        System.out.println("recipes = " + recipesWithIngredients);
         return recipesWithIngredients;
     }
 
