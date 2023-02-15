@@ -10,6 +10,7 @@ import com.codecool.hogwartshouses.persistence.repository.IngredientRepository;
 import com.codecool.hogwartshouses.persistence.repository.PotionRepository;
 import com.codecool.hogwartshouses.persistence.repository.RecipeRepository;
 import com.codecool.hogwartshouses.persistence.repository.StudentRepository;
+import com.codecool.hogwartshouses.service.exception.PotionNotFoundException;
 import com.codecool.hogwartshouses.service.exception.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,18 @@ public class PotionService {
     public Potion addPotion(NewPotion newPotion) {
         Potion potion = new Potion();
         setBrewingStudent(newPotion, potion);
-        checkIngredientsAndSaveIfNew(newPotion, potion);
+        checkIngredientsAndSaveIfNew(newPotion.getIngredients(), potion);
+        checkStatusAndSavePotion(potion);
+        return potion;
+    }
+
+    public Potion addIngredient(long potionId, Ingredient ingredient) {
+        Potion potion = potionRepository.findById(potionId).orElseThrow(() -> new PotionNotFoundException(potionId));
+        List<Ingredient> existingIngredients = potion.getIngredients();
+
+        checkIngredientsAndSaveIfNew(List.of(ingredient), potion);
+        existingIngredients.add(ingredient);
+        potion.setIngredients(existingIngredients);
         checkStatusAndSavePotion(potion);
         return potion;
     }
@@ -44,9 +56,8 @@ public class PotionService {
         potion.setBrewingStudent(brewingStudent);
     }
 
-    private void checkIngredientsAndSaveIfNew(NewPotion newPotion, Potion potion) {
-        List<Ingredient> potionIngredients = newPotion.getIngredients();
-        for (Ingredient potionIngredient : potionIngredients) {
+    private void checkIngredientsAndSaveIfNew(List<Ingredient> ingredients, Potion potion) {
+        for (Ingredient potionIngredient : ingredients) {
             try {
                 potionIngredient.setId(ingredientRepository.findByName(potionIngredient.getName()).getId());
             } catch (NullPointerException e) {
@@ -55,7 +66,7 @@ public class PotionService {
                 potionIngredient.setId(ingredient.getId());
             }
         }
-        potion.setIngredients(potionIngredients);
+        potion.setIngredients(ingredients);
     }
 
     private void checkStatusAndSavePotion(Potion potion) {
@@ -63,6 +74,7 @@ public class PotionService {
         Student brewingStudent = potion.getBrewingStudent();
         if (potionIngredients.size() < 5) {
             potion.setBrewingStatus(BrewingStatus.BREW);
+            potionRepository.save(potion);
         } else {
             List<Recipe> allRecipes = recipeRepository.findAll();
             Recipe existingRecipe = getExistingRecipe(potionIngredients, allRecipes);
@@ -94,8 +106,9 @@ public class PotionService {
                 discoveryCount++;
             }
         }
+        List<Ingredient> recipeIngredients = List.copyOf(potionIngredients);
         Recipe newRecipe = recipeRepository.save(new Recipe(0, brewingStudent.getName() +
-                "'s discovery # " + discoveryCount, brewingStudent, potionIngredients));
+                "'s discovery # " + discoveryCount, brewingStudent, recipeIngredients));
         potion.setBrewingStatus(BrewingStatus.DISCOVERY);
         potion.setRecipe(newRecipe);
         potion.setName(brewingStudent.getName() + "'s Potion");
@@ -112,4 +125,5 @@ public class PotionService {
     public List<Potion> findAllByStudentId(long studentId) {
         return potionRepository.findAllByBrewingStudentId(studentId);
     }
+
 }
