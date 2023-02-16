@@ -1,9 +1,9 @@
 import './App.css';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Content from './Content';
-import Footer from './Footer';
-import ContentRight from './ContentRight';
+import Header from './grid-components/Header';
+import Sidebar from './grid-components/Sidebar';
+import ContentLeft from './grid-components/ContentLeft';
+import ContentRight from './grid-components/ContentRight';
+import Footer from './grid-components/Footer';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
     <div className='wrapper'>
       <Header />
       <Sidebar />
-      <Content />
+      <ContentLeft />
       <ContentRight />
       <Footer /> 
     

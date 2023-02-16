@@ -1,10 +1,10 @@
-import React from 'react'
+import RecipeContainer from "../content-components/RecipeContainer"
 
 const ContentRight = () => {
   return (
     <div className="box content-right">
-    Recipe
-  </div>
+      <RecipeContainer />
+    </div>
   )
 }
 
