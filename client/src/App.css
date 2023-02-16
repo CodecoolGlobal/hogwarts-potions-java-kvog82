@@ -134,3 +134,12 @@ padding: 10px;
 .header, .footer {
 background-color: #28284485;
 }
+
+.potion {
+  font-size: 25px;
+  text-align: left;
+}
+
+.recipe-link {
+  float: right;
+}

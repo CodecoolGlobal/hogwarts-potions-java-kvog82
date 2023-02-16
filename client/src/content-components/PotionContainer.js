@@ -1,7 +1,31 @@
+import { useEffect, useState } from "react"
+import Potions from "./Potions"
+
 const PotionContainer = () => {
+  const baseUrl = "http://localhost:8080/potions"
+  const [headLine, setHeadLine] = useState("All Potions")
+  const [potions, setPotions] = useState([])
+
+  useEffect (() => {
+    const getPotions = async () => {
+      const potionsFetched = await fetchPotions("")
+      setPotions(potionsFetched)
+    }
+
+    getPotions()
+  }, [])
+
+  const fetchPotions = async (url) => {
+    const response = await fetch(baseUrl + url)
+    const potions = await response.json()
+    console.log(potions)
+    return potions
+  }
+
   return (
     <div>
-      Potion Container
+      <h3>{headLine}</h3>
+      <Potions potions={potions} />
     </div>
   )
 }
