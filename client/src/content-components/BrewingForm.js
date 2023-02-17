@@ -15,11 +15,26 @@ const BrewingForm = () => {
     event.preventDefault();
 
     console.log(inputs)
-    alert(inputs.potionId);
     if (inputs.potionId > 0 ) {
       getPotion();
+    } else {
+      createPotion();
+      console.log("potion id after create potion: " + potion.id)
     }
     
+  }
+
+  const createPotion = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(6)
+  };
+  console.log(requestOptions)
+  const response = await fetch(baseUrl + "/brew", requestOptions)
+  const data = await response.json()
+    setPotion(await data)
+    console.log("potion id in create potion: " + potion.id)
   }
 
   const getPotion = async () => {
