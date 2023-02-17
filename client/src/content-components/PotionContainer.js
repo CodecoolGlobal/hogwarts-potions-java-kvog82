@@ -17,7 +17,6 @@ const PotionContainer = () => {
   const fetchPotions = async (url) => {
     const response = await fetch(baseUrl + url)
     const potions = await response.json()
-    console.log(potions)
     return potions
   }
 
