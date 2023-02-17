@@ -91,6 +91,9 @@
 
 .content-left {
   grid-area: content-left;
+  text-align: left;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .content-right {
@@ -118,7 +121,7 @@
   grid-template-rows: 15% auto 5%;
   grid-template-areas:
              "....... header  header"
-             "sidebar content-left content-right"
+             "content-left content-left content-right"
              "footer footer footer";
   color: #444;
 }
@@ -137,7 +140,12 @@ background-color: #28284485;
 
 .potion {
   font-size: 25px;
-  text-align: left;
+  padding-bottom: 1em;
+}
+
+.potion-headline {
+  font-weight: bold;
+  color: rgb(47, 47, 66);
 }
 
 .recipe-link {

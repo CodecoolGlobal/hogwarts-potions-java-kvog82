@@ -3,7 +3,6 @@ import Potions from "./Potions"
 
 const PotionContainer = () => {
   const baseUrl = "http://localhost:8080/potions"
-  const [headLine, setHeadLine] = useState("All Potions")
   const [potions, setPotions] = useState([])
 
   useEffect (() => {
@@ -23,8 +22,8 @@ const PotionContainer = () => {
   }
 
   return (
-    <div>
-      <h3>{headLine}</h3>
+    <div className="box content-left">
+      Welcome to our Potions Kitchen! <br></br><br></br>
       <Potions potions={potions} />
     </div>
   )

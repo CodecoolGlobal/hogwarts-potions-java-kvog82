@@ -1,9 +1,8 @@
 import './App.css';
-import Header from './grid-components/Header';
-import Sidebar from './grid-components/Sidebar';
-import ContentLeft from './grid-components/ContentLeft';
-import ContentRight from './grid-components/ContentRight';
-import Footer from './grid-components/Footer';
+import Header from './fixed-components/Header';
+import Footer from './fixed-components/Footer';
+import PotionContainer from './content-components/PotionContainer';
+import BrewingForm from './content-components/BrewingForm';
 
 function App() {
 
@@ -11,9 +10,8 @@ function App() {
     <div className="App">
     <div className='wrapper'>
       <Header />
-      <Sidebar />
-      <ContentLeft />
-      <ContentRight />
+      <PotionContainer />
+      <BrewingForm />
       <Footer /> 
     
       </div>
