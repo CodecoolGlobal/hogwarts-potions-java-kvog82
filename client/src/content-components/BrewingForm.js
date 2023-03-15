@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
 
-const BrewingForm = ({potions, setPotions, students}) => {
+const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion}) => {
   const baseUrl = "http://localhost:8080/potions"
-  const [potion, setPotion] = useState([])
+
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
+    console.log(brewPotion)
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
@@ -15,12 +16,14 @@ const BrewingForm = ({potions, setPotions, students}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let inputPotion;
+
     if (inputs.potionId > 0) {
       inputPotion = await getPotion();
     } else {
       console.log(inputs)
       inputPotion = await createPotion(inputs.studentId);
     }
+    console.log(inputPotion)
     if (potions.some(po => po.id === inputPotion.id)) {
       const updatedPotions = potions.map((item) => item.id === inputPotion.id ? inputPotion : item);
       setPotions(updatedPotions);
@@ -38,14 +41,14 @@ const BrewingForm = ({potions, setPotions, students}) => {
   };
   const response = await fetch(baseUrl + "/brew", requestOptions)
   const data = await response.json()
-    setPotion(await data)
+    setBrewPotion(await data)
     return data
   }
 
   const getPotion = async () => {
     const url = ADD_INGREDIENT_URL.replace("${potionId}", inputs.potionId);
     const potionFetched = await fetchPotion(url)
-    setPotion(potionFetched)
+    setBrewPotion(potionFetched)
     return potionFetched
   }
 
