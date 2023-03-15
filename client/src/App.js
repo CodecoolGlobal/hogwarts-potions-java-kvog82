@@ -11,6 +11,7 @@ function App() {
   const [potions, setPotions] = useState([])
   const [students, setStudents] = useState([])
   const [brewPotion, setBrewPotion] = useState([])
+  const [brewPotionId, setBrewPotionId] = useState(0);
 
   useEffect (() => {
     const getPotions = async () => {
@@ -37,8 +38,8 @@ function App() {
     <div className='wrapper'>
       <Header />
       <Sidebar />
-      <PotionContainer potions={potions} setPotions={setPotions} brewPotion={brewPotion} setBrewPotion={setBrewPotion} />
-      <BrewingForm potions={potions} setPotions={setPotions} students={students} brewPotion={brewPotion} setBrewPotion={setBrewPotion} />
+      <PotionContainer potions={potions} setPotions={setPotions} students={students} brewPotion={brewPotion} setBrewPotion={setBrewPotion} brewPotionId={brewPotionId} setBrewPotionId={setBrewPotionId} />
+      <BrewingForm potions={potions} setPotions={setPotions} students={students} brewPotion={brewPotion} setBrewPotion={setBrewPotion} brewPotionId={brewPotionId} setBrewPotionId={setBrewPotionId} />
       <Footer />
       </div>
     </div>

@@ -1,62 +1,33 @@
 import {useEffect, useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
 
-const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion}) => {
-  const baseUrl = "http://localhost:8080/potions"
+const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId}) => {
 
-  const [inputs, setInputs] = useState({});
+  const [input, setInput] = useState("");
 
   const handleChange = (event) => {
-    console.log(brewPotion)
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
+    setInput(event.target.value)
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let inputPotion;
-
-    if (inputs.potionId > 0) {
-      inputPotion = await getPotion();
-    } else {
-      console.log(inputs)
-      inputPotion = await createPotion(inputs.studentId);
-    }
-    console.log(inputPotion)
+    let inputPotion = await addIngredient();
     if (potions.some(po => po.id === inputPotion.id)) {
       const updatedPotions = potions.map((item) => item.id === inputPotion.id ? inputPotion : item);
       setPotions(updatedPotions);
     } else {
       setPotions([...potions, inputPotion]);
     }
-    setInputs({});
+    setInput("");
   }
 
-  const createPotion = async (studentId) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(studentId)
-  };
-  const response = await fetch(baseUrl + "/brew", requestOptions)
-  const data = await response.json()
-    setBrewPotion(await data)
-    return data
-  }
 
-  const getPotion = async () => {
-    const url = ADD_INGREDIENT_URL.replace("${potionId}", inputs.potionId);
-    const potionFetched = await fetchPotion(url)
-    setBrewPotion(potionFetched)
-    return potionFetched
-  }
-
-  const fetchPotion = async (url) => {
+  const addIngredient = async () => {
+    const url = ADD_INGREDIENT_URL.replace("${potionId}", brewPotionId);
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify( { "name" : inputs.ingredient} )
+      body: JSON.stringify( { "name" : input} )
   };
   const response = await fetch(url, requestOptions)
   const data = await response.json()
@@ -66,37 +37,22 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion})
   return (
     <div className="box content-right">
         Brewing Section
+      {brewPotionId === 0 ? "Please select a potion to brew" :
     <form onSubmit={handleSubmit}>
-      <label>Select Student:
-        <select name="studentId" id="studentId" value={inputs.studentId || ""} onChange={handleChange}>
-          <option value={0}>
-            Please select
-          </option>
-          {students.map((student) => (
-              <option key={student.id} value={student.id}>
-                {student.name}
-              </option>
-          ))}
-        </select>
-      </label>
-      <label>Enter Potion Id:
-        <input
-          type="number"
-          name="potionId"
-          value={inputs.potionId || ""}
-          onChange={handleChange}
-        />
-      </label>
+
+
       <label>Enter Ingredient:
         <input
           type="text"
           name="ingredient"
-          value={inputs.ingredient || ""}
+          value={input}
           onChange={handleChange}
         />
       </label>
         <input type="submit" />
     </form>
+
+      }
 
     </div>
   )
