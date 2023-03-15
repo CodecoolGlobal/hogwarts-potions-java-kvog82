@@ -1,11 +1,18 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
+import Ingredients from "./Ingredients";
 
-const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId}) => {
+const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId}) => {
 
   const [input, setInput] = useState("");
+  let ingredients = brewPotion.ingredients;
+  if (brewPotion.brewingStatus === "REPLICA" || brewPotion.brewingStatus === "DISCOVERY") {
+    setBrewPotion([])
+    setBrewPotionId(0)
+  }
   console.log(brewPotionId)
   console.log(brewPotion)
+  console.log(brewPotion.brewingStatus)
   const handleChange = (event) => {
     setInput(event.target.value)
   }
@@ -57,6 +64,9 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
             </div>
         }
       {brewPotion.id}
+
+      {!ingredients ? " " : <Ingredients ingredients={ingredients} />}
+
     </div>
   )
 
