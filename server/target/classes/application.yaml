@@ -1,19 +1,16 @@
 server:
   port: 8080
 spring:
-  h2:
-    console:
-      enabled: true
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${PSQL_USER}
+    password: ${PSQL_PASSWORD}
     initialization-mode: always
     continue-on-error: true
   banner:
