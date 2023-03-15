@@ -4,7 +4,8 @@ import {ADD_INGREDIENT_URL} from "../constants/urls";
 const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId}) => {
 
   const [input, setInput] = useState("");
-
+  console.log(brewPotionId)
+  console.log(brewPotion)
   const handleChange = (event) => {
     setInput(event.target.value)
   }
@@ -12,11 +13,14 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
   const handleSubmit = async (event) => {
     event.preventDefault();
     let inputPotion = await addIngredient();
+
     if (potions.some(po => po.id === inputPotion.id)) {
       const updatedPotions = potions.map((item) => item.id === inputPotion.id ? inputPotion : item);
       setPotions(updatedPotions);
+      setBrewPotion(inputPotion)
     } else {
       setPotions([...potions, inputPotion]);
+      setBrewPotion(inputPotion)
     }
     setInput("");
   }
@@ -37,23 +41,22 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
   return (
     <div className="box content-right">
         Brewing Section
-      {brewPotionId === 0 ? "Please select a potion to brew" :
-    <form onSubmit={handleSubmit}>
-
-
-      <label>Enter Ingredient:
-        <input
-          type="text"
-          name="ingredient"
-          value={input}
-          onChange={handleChange}
-        />
-      </label>
-        <input type="submit" />
-    </form>
-
-      }
-
+        {brewPotionId === 0 ? "Please select a potion to brew" :
+            <div>
+              <form onSubmit={handleSubmit}>
+                <label>Enter new Ingredient for Potion:
+                  <input
+                    type="text"
+                    name="ingredient"
+                    value={input}
+                    onChange={handleChange}
+                  />
+                </label>
+                  <input type="submit" />
+              </form>
+            </div>
+        }
+      {brewPotion.id}
     </div>
   )
 

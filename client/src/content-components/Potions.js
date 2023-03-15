@@ -5,26 +5,20 @@ import {ADD_INGREDIENT_URL, POTIONS_URL} from "../constants/urls";
 
 const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId }) => {
 
-  // console.log(students)
-
   const handleNewPotionClick = async (event) => {
     event.preventDefault();
-    console.log(event.target.value)
     let inputPotion = await createPotion(event.target.value);
     setBrewPotionId(inputPotion.id)
     setBrewPotion(inputPotion)
     setPotions([...potions, inputPotion]);
     setInputs({});
-    // const name = event.target.name;
-    // const value = event.target.value;
-    // setInputs(values => ({...values, [name]: value}))
   }
 
   const handleUpdatePotionClick = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
     setBrewPotionId(event.target.value)
     let existingPotion = potions.find(x => x.id === event.target.value)
+    setBrewPotion([...brewPotion, existingPotion])
   }
   const [inputs, setInputs] = useState({});
 
