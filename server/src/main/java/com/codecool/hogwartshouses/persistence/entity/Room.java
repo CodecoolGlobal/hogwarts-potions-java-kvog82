@@ -21,8 +21,9 @@ import java.util.Set;
 @Builder
 public class Room {
 
-    private @Id
-    @GeneratedValue long id;
+    @Id
+    @GeneratedValue
+    private long id;
     private int number;
     private House house;
     @OneToMany

@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class DatabaseLoader {
                     ingredients.get(3), ingredients.get(4)));
             strengthPotion.setBrewingStatus(BrewingStatus.DISCOVERY);
             strengthPotion.setRecipe(strength);
+
 
             potionRepository.saveAll(List.of(strengthPotion));
         };

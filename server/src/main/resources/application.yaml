@@ -1,20 +1,18 @@
 server:
   port: 8080
 spring:
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    username: xxx
-#    password: xxx
-#    url: jdbc:postgresql://localhost:5432/hogwarts
-#    platform: postgres
-#    initialization-mode: always
-#    continue-on-error: true
-#    jpa:
-#      show-sql: true
-#      generate-ddl: true
-#      hibernate:
-#        ddl-auto: create-drop
-#      database: postgresql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${PSQL_USER}
+    password: ${PSQL_PASSWORD}
+    initialization-mode: always
+    continue-on-error: true
   banner:
     location: classpath:hogwarts-banner.txt
 datasets:
@@ -29,7 +27,7 @@ datasets:
     - name: "Harry Potter"
       pet: OWL
     - name: "Ron Weasley"
-      pet: NONE
+      pet: RAT
     - name: "Hermine Granger"
       pet: CAT
     - name: "Draco Malfoy"
