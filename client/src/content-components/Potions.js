@@ -18,6 +18,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
     event.preventDefault();
     setBrewPotionId(event.target.value)
     let existingPotion = potions.find(x => x.id === event.target.value)
+    setBrewPotionId(event.target.value)
     setBrewPotion([...brewPotion, existingPotion])
   }
   const [inputs, setInputs] = useState({});

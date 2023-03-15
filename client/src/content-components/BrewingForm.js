@@ -3,16 +3,20 @@ import {ADD_INGREDIENT_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
 
 const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId}) => {
-
+  let ingredients;
   const [input, setInput] = useState("");
-  let ingredients = brewPotion.ingredients;
-  if (brewPotion.brewingStatus === "REPLICA" || brewPotion.brewingStatus === "DISCOVERY") {
-    setBrewPotion([])
-    setBrewPotionId(0)
+  if (brewPotion) {
+    ingredients = brewPotion.ingredients;
+    if (brewPotion.brewingStatus === "REPLICA" || brewPotion.brewingStatus === "DISCOVERY") {
+      setBrewPotion(null)
+      setBrewPotionId(0)
+    }
+    console.log(brewPotion)
+    console.log(brewPotion.brewingStatus)
   }
+
   console.log(brewPotionId)
-  console.log(brewPotion)
-  console.log(brewPotion.brewingStatus)
+
   const handleChange = (event) => {
     setInput(event.target.value)
   }
@@ -51,7 +55,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
         {brewPotionId === 0 ? "Please select a potion to brew" :
             <div>
               <form onSubmit={handleSubmit}>
-                <label>Enter new Ingredient for Potion:
+                <label>Enter new Ingredient for Potion {brewPotionId}:
                   <input
                     type="text"
                     name="ingredient"
@@ -63,7 +67,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
               </form>
             </div>
         }
-      {brewPotion.id}
+
 
       {!ingredients ? " " : <Ingredients ingredients={ingredients} />}
 

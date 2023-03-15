@@ -10,7 +10,7 @@ import {POTIONS_URL, STUDENTS_URL} from "./constants/urls";
 function App() {
   const [potions, setPotions] = useState([])
   const [students, setStudents] = useState([])
-  const [brewPotion, setBrewPotion] = useState([])
+  const [brewPotion, setBrewPotion] = useState(null)
   const [brewPotionId, setBrewPotionId] = useState(0);
 
   useEffect (() => {
