@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
 import BrewingHelp from "./BrewingHelp";
+import PotionForm from "./PotionForm";
 
 const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId}) => {
   let ingredients;
@@ -51,8 +52,12 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
   return (
     <div className="box content-right">
         Brewing Section
-        {brewPotionId === 0 ? "Please select a potion to brew" :
-            <div className="potion">
+        <div className="potion">
+        {brewPotionId === 0 ?
+
+            <PotionForm potions={potions} setPotions={setPotions} students={students} />
+            :
+            <div >
               <form onSubmit={handleSubmit}>
                 <label>Enter new Ingredient for Potion {brewPotionId}:
                   <input
@@ -66,7 +71,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
               </form>
             </div>
         }
-
+        </div>
 
       {!ingredients ? " " : <Ingredients ingredients={ingredients} />}
 

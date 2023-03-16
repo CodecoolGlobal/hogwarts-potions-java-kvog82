@@ -3,9 +3,10 @@ import React from "react";
 import { useState } from "react";
 import {ADD_INGREDIENT_URL, POTIONS_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
+import FilterPotions from "./FilterPotions";
 
 const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId }) => {
-
+  const [inputs, setInputs] = useState({});
   const handleNewPotionClick = async (event) => {
     event.preventDefault();
     if (event.target.value === "") {
@@ -26,7 +27,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
     setBrewPotionId(event.target.value)
     setBrewPotion(existingPotion)
   }
-  const [inputs, setInputs] = useState({});
+
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -49,6 +50,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
 
   return (
     <>
+      <FilterPotions students={students} inputs={inputs} setInputs={setInputs} potions={potions} setPotions={setPotions} />
       <div className="potion">
        Start brewing a new potion.
         <label>Select Student:
@@ -70,13 +72,15 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
           <span className="potion-headline">
           {potion.id} | {(potion.name ? potion.name : "No name yet (not finished) ")}
             {(potion.name ? " " : <button value={potion.id} onClick={handleUpdatePotionClick}>Continue Brewing</button>)}
+            {(potion.brewingStatus === "DISCOVERY" ? <span> (Discovery &#x1F9D9;) </span> : "")}
+            {(potion.brewingStatus === "REPLICA" ? " (Replica)" : "")}
             <br></br>
           </span>
-          Brewed by: {potion.brewingStudent.name} |
-          Status: {potion.brewingStatus} <br></br>
-          <Ingredients ingredients={potion.ingredients} />
-          <br></br>
+          Brewed by: {potion.brewingStudent.name} <br></br>
           {(potion.recipe ? ('Recipe: ' + potion.recipe.name) : '')}
+          <Ingredients ingredients={potion.ingredients} />
+
+
         </div>
       ))}
     </>
