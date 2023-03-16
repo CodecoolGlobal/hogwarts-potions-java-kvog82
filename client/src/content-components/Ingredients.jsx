@@ -1,7 +1,14 @@
+import React from "react";
+
 const Ingredients = ({ingredients}) => {
     return (
-        <div>
-            {ingredients.map((ingredient) => <div key={ingredient.name}>{ingredient.name}</div>)}
+        <div className="potion">
+            Ingredients: <>&nbsp;</>
+            {ingredients.map((ingredient, index) => (
+                <span key={ingredient.id}>
+            {( index ? ', ' : '') + ingredient.name}
+            </span>
+            ))}
         </div>
     )
 }

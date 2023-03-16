@@ -2,16 +2,21 @@ import RecipeContainer from "./BrewingForm";
 import React from "react";
 import { useState } from "react";
 import {ADD_INGREDIENT_URL, POTIONS_URL} from "../constants/urls";
+import Ingredients from "./Ingredients";
 
 const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId }) => {
 
   const handleNewPotionClick = async (event) => {
     event.preventDefault();
-    let inputPotion = await createPotion(event.target.value);
-    setBrewPotionId(inputPotion.id)
-    setBrewPotion(inputPotion)
-    setPotions([...potions, inputPotion]);
-    setInputs({});
+    if (event.target.value === "") {
+      alert("Please select a student!")
+    } else {
+      let inputPotion = await createPotion(event.target.value);
+      setBrewPotionId(inputPotion.id)
+      setBrewPotion(inputPotion)
+      setPotions([...potions, inputPotion]);
+      setInputs({});
+    }
   }
 
   const handleUpdatePotionClick = (event) => {
@@ -19,7 +24,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
     setBrewPotionId(event.target.value)
     let existingPotion = potions.find(x => x.id === event.target.value)
     setBrewPotionId(event.target.value)
-    setBrewPotion([...brewPotion, existingPotion])
+    setBrewPotion(existingPotion)
   }
   const [inputs, setInputs] = useState({});
 
@@ -44,13 +49,11 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
 
   return (
     <>
-      <div>
+      <div className="potion">
        Start brewing a new potion.
         <label>Select Student:
           <select name="studentId" id="studentId" value={inputs.studentId || ""} onChange={handleChange}>
-            <option value={0}>
-              Please select
-            </option>
+            <option value="">Select student</option>
             {students.map((student) => (
                 <option key={student.id} value={student.id}>
                   {student.name}
@@ -71,11 +74,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
           </span>
           Brewed by: {potion.brewingStudent.name} |
           Status: {potion.brewingStatus} <br></br>
-          Ingredients: {potion.ingredients.map((ingredient, index) => (
-            <span key={ingredient.id}>
-            {( index ? ', ' : '') + ingredient.name}
-            </span>
-          ))}
+          <Ingredients ingredients={potion.ingredients} />
           <br></br>
           {(potion.recipe ? ('Recipe: ' + potion.recipe.name) : '')}
         </div>

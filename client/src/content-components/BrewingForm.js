@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
+import BrewingHelp from "./BrewingHelp";
 
 const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId}) => {
   let ingredients;
@@ -11,11 +12,9 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
       setBrewPotion(null)
       setBrewPotionId(0)
     }
-    console.log(brewPotion)
-    console.log(brewPotion.brewingStatus)
+    // console.log(brewPotion)
+    // console.log(brewPotion.brewingStatus)
   }
-
-  console.log(brewPotionId)
 
   const handleChange = (event) => {
     setInput(event.target.value)
@@ -53,7 +52,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
     <div className="box content-right">
         Brewing Section
         {brewPotionId === 0 ? "Please select a potion to brew" :
-            <div>
+            <div className="potion">
               <form onSubmit={handleSubmit}>
                 <label>Enter new Ingredient for Potion {brewPotionId}:
                   <input
@@ -70,6 +69,8 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
 
 
       {!ingredients ? " " : <Ingredients ingredients={ingredients} />}
+
+      {ingredients && ingredients.length > 0 ? <BrewingHelp potionId={brewPotionId} /> : ""}
 
     </div>
   )

@@ -1,7 +1,10 @@
+import Ingredients from "./Ingredients";
+
 const Recipe = ({recipe}) => {
   return (
     <div>
-      {recipe.name}
+      <span className="potion-headline">Recipe {recipe.name} by {recipe.brewer.name}</span>  <br></br>
+      <Ingredients ingredients={recipe.ingredients} />
     </div>
   )
 }
