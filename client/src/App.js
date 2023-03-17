@@ -49,7 +49,7 @@ function App() {
         />
         <Route path="/houses" element={<>
           <HousesLeft fetchData={fetchData} rooms={rooms} setRooms={setRooms} />
-          <HousesRight rooms={rooms} setRooms={setRooms} /></>}
+          <HousesRight fetchData={fetchData} rooms={rooms} setRooms={setRooms} /></>}
         />
 
       </Routes>

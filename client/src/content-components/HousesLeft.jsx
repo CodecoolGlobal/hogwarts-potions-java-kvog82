@@ -29,29 +29,17 @@ const HousesLeft = ({fetchData, rooms, setRooms}) => {
         setRoom(fetchedRoom)
     }
 
-    const handleFilter = async (event) => {
-        event.preventDefault();
-        let url = ROOMS_URL;
-        if (event.target.value === "available") {
-            url = ROOMS_AVAILABLE_URL
-        }
-        if (event.target.value === "rat-owners") {
-            url = ROOMS_RAT_OWNERS_URL
-        }
-        const fetchedRooms = await fetchData(url)
-        setRooms(fetchedRooms)
-        console.log(fetchedRooms)
-    }
+
 
     return (
         <div className="content-left">
-            houses
+            Take a look around Hogwarts!
+            <p>Click on a room to see its residents.</p>
             <table>
                 <tbody>
                 <tr>
                     <th>House</th>
                     <th>Rooms</th>
-                    <th>Room Students (click on room)</th>
                 </tr>
                 <tr>
                     <td>Gryffindor</td>

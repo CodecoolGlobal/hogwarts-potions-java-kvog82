@@ -1,8 +1,25 @@
-const HousesRight = ({rooms, setRooms}) => {
+import {ROOMS_AVAILABLE_URL, ROOMS_RAT_OWNERS_URL, ROOMS_URL} from "../constants/urls";
+
+const HousesRight = ({fetchData, rooms, setRooms}) => {
+
+    const handleFilter = async (event) => {
+        event.preventDefault();
+        let url = ROOMS_URL;
+        if (event.target.value === "available") {
+            url = ROOMS_AVAILABLE_URL
+        }
+        if (event.target.value === "rat-owners") {
+            url = ROOMS_RAT_OWNERS_URL
+        }
+        const fetchedRooms = await fetchData(url)
+        setRooms(fetchedRooms)
+        console.log(fetchedRooms)
+    }
     return (
         <div className="content-right">
             Admin options
-
+            <button value="available" onClick={handleFilter}>Show available rooms</button>
+            <button value="rat-owners" onClick={handleFilter}>Show rooms for rat owners</button>
         </div>
     )
 }
