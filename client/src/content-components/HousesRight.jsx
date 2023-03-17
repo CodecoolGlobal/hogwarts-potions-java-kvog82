@@ -1,4 +1,5 @@
 import {ROOMS_AVAILABLE_URL, ROOMS_RAT_OWNERS_URL, ROOMS_URL} from "../constants/urls";
+import RoomCreationForm from "./RoomCreationForm";
 
 const HousesRight = ({fetchData, rooms, setRooms}) => {
 
@@ -20,6 +21,8 @@ const HousesRight = ({fetchData, rooms, setRooms}) => {
             Admin options
             <button value="available" onClick={handleFilter}>Show available rooms</button>
             <button value="rat-owners" onClick={handleFilter}>Show rooms for rat owners</button>
+            <RoomCreationForm rooms={rooms} setRooms={setRooms} />
+
         </div>
     )
 }
