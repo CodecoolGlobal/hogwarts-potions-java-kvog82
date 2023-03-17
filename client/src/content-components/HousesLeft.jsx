@@ -48,7 +48,7 @@ const HousesLeft = ({fetchData, rooms, setRooms}) => {
                             <div key={room.id}>{room.house === "GRYFFINDOR" ? <button value={room.id} onClick={handleClick}>Room {room.number}</button> : ""}</div>
                         ))}
                     </td>
-                    <td align="center" className="houses" rowSpan="4">{room ? <Room room={room}/> : "" }</td>
+                    <td align="center" rowSpan="4">{room ? <Room room={room}/> : "" }</td>
                 </tr>
                 <tr>
                     <td>Hufflepuff</td>

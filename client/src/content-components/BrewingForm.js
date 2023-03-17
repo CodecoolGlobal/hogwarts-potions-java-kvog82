@@ -51,7 +51,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
 
   return (
     <div className="box content-right">
-        Brewing Section
+        <h4>Brewing Section</h4>
         <div className="potion">
         {brewPotionId === 0 ?
 

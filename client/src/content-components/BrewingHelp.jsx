@@ -21,8 +21,8 @@ const BrewingHelp = ({potionId}) => {
 
     return (
         <div className="potion">
-            <button value={potionId} onClick={handleClick}>Get help</button>
-            {recipes.length === 0 ? "" : <Recipes recipes={recipes} />}
+            <button value={potionId} onClick={handleClick}>Get help</button><br></br>
+            {recipes.length === 0 ? "No recipes with the same ingredients." : <Recipes recipes={recipes} />}
         </div>
     )
 }

@@ -1,15 +1,8 @@
 import React, {useState} from "react";
-import {ROOMS_URL} from "../constants/urls";
+import {ROOM_URL, ROOMS_URL} from "../constants/urls";
 
-
-const RoomDeletionForm = ({rooms, setRooms}) => {
+const RoomDeletionForm = ({rooms, setRooms, fetchData}) => {
     const [inputs, setInputs] = useState({});
-    const [room, setRoom] = useState({
-        house : "",
-        number: [],
-        students: []
-    });
-
 
     const handleChange = (event) => {
         console.log(inputs)
@@ -18,52 +11,27 @@ const RoomDeletionForm = ({rooms, setRooms}) => {
         setInputs(values => ({...values, [name]: value}))
     }
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(rooms)
-        const lastRoom = rooms[rooms.length -1]
-        const lastRoomNumber = lastRoom.number
-        console.log(lastRoomNumber)
-
-        const newRoom = {
-            house: inputs.house,
-            number: lastRoomNumber+1,
-            students: []
-        };
-
-        try {
-            const response = await fetch(ROOMS_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newRoom),
-            });
-
-            const savedRoom = await response.json();
-            setRoom(savedRoom);
-            setRooms([...rooms, savedRoom]);
-        } catch (err) {
-            console.log(err);
+        let deleteRoom = rooms.find(room => room.number === parseInt(inputs.roomNumber));
+        if (deleteRoom) {
+            const url = ROOM_URL.replace("${roomId}", deleteRoom.id);
+            try {
+                await fetch(url, {method: "DELETE"});
+                let newRooms = await fetchData(ROOMS_URL)
+                let cleanedRooms = newRooms.filter(function( room ) {
+                    return room.house !== null;
+                });
+                setRooms(cleanedRooms)
+            } catch (err) {
+            }
         }
-
     };
-
-
-
 
     return (
         <div>
+            Delete room:
             <form onSubmit={handleSubmit}>
-                <label>House
-                    <select name="house" id="house" value={inputs.house || ""} onChange={handleChange}>
-                        <option value="GRYFFINDOR">Gryffindor</option>
-                        <option value="HUFFLEPUFF">Hufflepuff</option>
-                        <option value="RAVENCLAW">Ravenclaw</option>
-                        <option value="SLYTHERIN">Slytherin</option>
-                    </select>
-                </label><br></br>
                 <label>Room number:
                     <input
                         type="number"
@@ -72,9 +40,6 @@ const RoomDeletionForm = ({rooms, setRooms}) => {
                         onChange={handleChange}
                     />
                 </label><br></br>
-                <br></br>
-
-
                 <input type="submit" />
             </form>
         </div>
