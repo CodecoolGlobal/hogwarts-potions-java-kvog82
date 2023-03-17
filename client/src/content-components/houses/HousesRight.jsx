@@ -15,13 +15,12 @@ const HousesRight = ({fetchData, rooms, setRooms}) => {
         }
         const fetchedRooms = await fetchData(url)
         setRooms(fetchedRooms)
-        console.log(fetchedRooms)
     }
     return (
         <div className="content-right">
             <h4>Admin options</h4>
-            <button value="available" onClick={handleFilter}>Show available rooms</button>
-            <button value="rat-owners" onClick={handleFilter}>Show rooms for rat owners</button>
+            <button className="button-room-admin" value="available" onClick={handleFilter}>Show available rooms</button>
+            <button className="button-room-admin" value="rat-owners" onClick={handleFilter}>Show rooms for rat owners</button>
             <RoomCreationForm rooms={rooms} setRooms={setRooms} />
             <RoomDeletionForm rooms={rooms} setRooms={setRooms} fetchData={fetchData}/>
         </div>

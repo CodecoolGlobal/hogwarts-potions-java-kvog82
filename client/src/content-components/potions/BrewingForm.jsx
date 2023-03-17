@@ -67,7 +67,7 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
                     onChange={handleChange}
                   />
                 </label>
-                  <input type="submit" />
+                  <input type="submit" className="submit" value="Add" />
               </form>
               <div>
               <button onClick={stopBrewing}>Stop brewing</button>

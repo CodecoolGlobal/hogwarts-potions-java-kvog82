@@ -4,7 +4,7 @@ const PotionContainer = ({potions, setPotions, students, setBrewPotion, setBrewP
 
   return (
     <div className="box content-left">
-      Welcome to our Potions Kitchen! <br></br><br></br>
+      <span className="section-headline">Welcome to our Potions Kitchen!</span><br></br><br></br>
       <Potions potions={potions} setPotions={setPotions} students={students}  setBrewPotion={setBrewPotion} setBrewPotionId={setBrewPotionId} />
     </div>
   )

@@ -45,7 +45,8 @@ const PotionForm = ({potions, setPotions, students}) => {
       return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Student:
+                Enter a new potion: <br></br>
+                <label>Student:<span>&nbsp;</span>
                     <select name="brewingStudentId" id="brewingStudentId" value={inputs.brewingStudentId || ""} onChange={handleChange}>
                         <option value="">Select student</option>
                         {students.map((student) => (
@@ -55,7 +56,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                         ))}
                     </select>
                 </label><br></br>
-                <label>Ingredient 1:
+                <label>Ingredient 1:<span>&nbsp;</span>
                     <input
                         type="text"
                         name="ingredient1"
@@ -63,7 +64,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                         onChange={handleChange}
                     />
                 </label><br></br>
-                <label>Ingredient 2:
+                <label>Ingredient 2:<span>&nbsp;</span>
                     <input
                         type="text"
                         name="ingredient2"
@@ -71,7 +72,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                         onChange={handleChange}
                     />
                 </label><br></br>
-                <label>Ingredient 3:
+                <label>Ingredient 3:<span>&nbsp;</span>
                     <input
                         type="text"
                         name="ingredient3"
@@ -79,7 +80,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                         onChange={handleChange}
                     />
                 </label><br></br>
-                <label>Ingredient 4:
+                <label>Ingredient 4:<span>&nbsp;</span>
                     <input
                         type="text"
                         name="ingredient4"
@@ -87,7 +88,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                         onChange={handleChange}
                     />
                 </label><br></br>
-                <label>Ingredient 5:
+                <label>Ingredient 5:<span>&nbsp;</span>
                     <input
                         type="text"
                         name="ingredient5"
@@ -96,7 +97,7 @@ const PotionForm = ({potions, setPotions, students}) => {
                     />
                 </label><br></br>
 
-                <input type="submit" />
+                <input type="submit" className="submit" />
             </form>
         </div>
       )

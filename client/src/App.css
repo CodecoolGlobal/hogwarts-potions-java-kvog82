@@ -1,12 +1,11 @@
 .App {
-  font-family: 'Pangolin', cursive;
+    font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(47, 47, 66);
+  color:  #232222;
   text-align: center;
   background: url(http://localhost:8080/get-background-image) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -14,7 +13,7 @@
   -o-background-size: cover;
   background-size: cover;
   height: 100vh;
-  font-size:40px;
+  font-size:25px;
 }
 
 .App-logo {
@@ -65,14 +64,15 @@
 }
 
 .waviy {
+  font-family: 'Pangolin', cursive;
   position: relative;
 }
 .waviy span {
   position: relative;
   display: inline-block;
-  font-size: 60px;
+  font-size: 80px;
   font-weight: bold;
-  color: rgb(47, 47, 66);
+  color:  #232222;
   text-transform: uppercase;
   animation: flip 2s infinite;
   animation-delay: calc(.2s * var(--i));
@@ -87,6 +87,7 @@
 
 .sidebar {
   grid-area: sidebar;
+  text-align: left;
 }
 
 .content-left {
@@ -113,8 +114,6 @@
 .wrapper {
   width: 90%;
   height: 80%;
-  border-style: dashed;
-  border-color: aqua;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 20% 50% auto;
@@ -123,41 +122,37 @@
              "....... header  header"
              "sidebar content-left content-right"
              "footer footer footer";
-  color: #444;
 }
 
 .box {
-background-color: #38385f85;
-color: #fff;
-border-radius: 5px;
+color: #232222;
 padding: 10px;
-
 }
 
-.header, .footer {
-background-color: #28284485;
+.footer {
+  color: #ffffff;
 }
 
 .potion {
   font-size: 25px;
+  text-shadow: 1px 1px 4px rgb(255, 255, 255);
   padding-bottom: 1em;
 }
 
 .potion-headline {
   font-weight: bold;
-  color: rgb(47, 47, 66);
 }
 
-.recipe-link {
-  float: right;
-}
-
-.houses {
-  border-style: dashed;
-  border-color: blue;
+.section-headline {
+  font-weight: bold;
+  font-size: 40px;
+  background: linear-gradient(to right, #9ca932, #1a8378, #4c82a6, #0317a9);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 a {
+  font-size: 40px;
   font-weight: bold;
   display: inline-block;
   position: relative;
@@ -174,12 +169,83 @@ a::after {
   bottom: .07em;
   height: .1em;
   width: 100%;
-  background: linear-gradient(110deg, #e1f549, #29d0be, #6cb8ea, #ff5959);
+  background: linear-gradient(110deg, #e1f549, #29d0be, #6cb8ea, #0523fd);
   z-index: -1;
   transition: height .25s cubic-bezier(.6,0,.4,1);
 }
 
 a:hover::after {
-
   height: .2em;
+}
+
+.house{
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #e1f549, 0 0 30px #e1f549, 0 0 40px #e1f549, 0 0 55px #e1f549, 0 0 75px #e1f549;
+  text-align: center;
+  vertical-align:top;
+  padding: 10px;
+}
+
+button {
+  background-color: transparent;
+  border: 2px solid #e1f549;
+  border-radius: 0.6em;
+  color: #232222;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 10px;
+  padding: 0.5em 1.4em;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 0 40px 40px #e1f549 inset, 0 0 0 0 #e1f549;
+  transition: all 150ms ease-in-out;
+}
+button:hover,
+button:focus {
+  color: #232222;
+  outline: 0;
+  box-shadow: 0 0 10px 0 #e1f549 inset, 0 0 10px 4px #e1f549;
+}
+
+.submit {
+  background-color: transparent;
+  border: 2px solid #e1f549;
+  border-radius: 0.6em;
+  color: #232222;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 15px;
+  padding: 0.2em 1em;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 0 40px 40px #e1f549 inset, 0 0 0 0 #e1f549;
+  transition: all 150ms ease-in-out;
+}
+.submit:hover,
+.submit:focus {
+  color: #232222;
+  outline: 0;
+  box-shadow: 0 0 10px 0 #e1f549 inset, 0 0 10px 4px #e1f549;
+}
+
+label {
+  font-size: 20px;
+}
+
+input[type="text"], select {
+  border: 2px solid #232222;
+  background: transparent;
+  font-size: 20px;
+}
+
+input[type=text]:focus, select:focus {
+  border: 3px solid #232222;
+  font-size: 20px;
+}
+
+.room-students {
+  width: 20em;
+  vertical-align: top;
 }

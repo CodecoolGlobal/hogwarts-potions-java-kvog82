@@ -32,15 +32,16 @@ const RoomDeletionForm = ({rooms, setRooms, fetchData}) => {
         <div>
             Delete room:
             <form onSubmit={handleSubmit}>
-                <label>Room number:
+                <label>Room number: <span>&nbsp;</span>
                     <input
-                        type="number"
+                        type="text"
+                        size="1"
                         name="roomNumber"
                         value={inputs.roomNumber || ""}
                         onChange={handleChange}
                     />
-                </label><br></br>
-                <input type="submit" />
+                </label>
+                <input className="submit" type="submit" value="Delete" />
             </form>
         </div>
     )

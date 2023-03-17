@@ -43,16 +43,17 @@ const RoomCreationForm = ({rooms, setRooms}) => {
 
     return (
         <div>
+            Create a new empty room:
             <form onSubmit={handleSubmit}>
-                <label>House
+                <label>House: <span>&nbsp;</span>
                     <select name="house" id="house" value={inputs.house || ""} onChange={handleChange}>
                         <option value="GRYFFINDOR">Gryffindor</option>
                         <option value="HUFFLEPUFF">Hufflepuff</option>
                         <option value="RAVENCLAW">Ravenclaw</option>
                         <option value="SLYTHERIN">Slytherin</option>
                     </select>
-                </label><br></br>
-                <input type="submit" />
+                </label>
+                <input className="submit" type="submit" value="Create" />
             </form>
         </div>
     )
