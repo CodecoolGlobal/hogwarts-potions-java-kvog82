@@ -36,7 +36,10 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
     setInput("");
   }
 
-
+  const stopBrewing = (event) => {
+    setBrewPotionId(0);
+    setBrewPotion(null);
+  }
   const addIngredient = async () => {
     const url = ADD_INGREDIENT_URL.replace("${potionId}", brewPotionId);
     const requestOptions = {
@@ -69,7 +72,11 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
                 </label>
                   <input type="submit" />
               </form>
+              <div>
+              <button onClick={stopBrewing}>Stop brewing</button>
+              </div>
             </div>
+
         }
         </div>
 

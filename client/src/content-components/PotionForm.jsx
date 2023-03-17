@@ -23,9 +23,11 @@ const PotionForm = ({potions, setPotions, students}) => {
             .filter((value, index) => index >= 1 && index <= 5)
             .map(name => ({ name }));
 
+        const cleanedIngredients = ingredientsList.filter(ingredient => ingredient !== "");
+
         const newPotion = {
             brewingStudentId: inputs.brewingStudentId,
-            ingredients: ingredientsList
+            ingredients: cleanedIngredients
         };
 
         try {
@@ -40,6 +42,7 @@ const PotionForm = ({potions, setPotions, students}) => {
             const savedPotion = await response.json();
             setPotion(savedPotion);
             setPotions([...potions, savedPotion]);
+            setInputs({});
         } catch (err) {
             console.log(err);
         }
