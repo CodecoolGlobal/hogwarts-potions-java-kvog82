@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {ADD_INGREDIENT_URL} from "../constants/urls";
+import {ADD_INGREDIENT_URL} from "../../constants/urls";
 import Ingredients from "./Ingredients";
-import BrewingHelp from "./BrewingHelp";
-import PotionForm from "./PotionForm";
+import BrewingHelp from "./brewingSection/BrewingHelp";
+import PotionForm from "./brewingSection/PotionForm";
 
 const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId}) => {
   let ingredients;

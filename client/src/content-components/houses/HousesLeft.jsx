@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ROOM_URL, ROOMS_URL} from "../constants/urls";
+import {ROOM_URL, ROOMS_URL} from "../../constants/urls";
 import Room from "./Room";
 
 const HousesLeft = ({fetchData, rooms, setRooms}) => {

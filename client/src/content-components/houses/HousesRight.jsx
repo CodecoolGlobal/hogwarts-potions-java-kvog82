@@ -1,4 +1,4 @@
-import {ROOMS_AVAILABLE_URL, ROOMS_RAT_OWNERS_URL, ROOMS_URL} from "../constants/urls";
+import {ROOMS_AVAILABLE_URL, ROOMS_RAT_OWNERS_URL, ROOMS_URL} from "../../constants/urls";
 import RoomCreationForm from "./RoomCreationForm";
 import RoomDeletionForm from "./RoomDeletionForm";
 

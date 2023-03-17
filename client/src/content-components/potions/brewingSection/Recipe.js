@@ -1,4 +1,4 @@
-import Ingredients from "./Ingredients";
+import Ingredients from "../Ingredients";
 
 const Recipe = ({recipe}) => {
   return (

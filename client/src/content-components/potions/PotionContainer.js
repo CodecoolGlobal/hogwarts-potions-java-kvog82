@@ -1,4 +1,4 @@
-import Potions from "./Potions"
+import Potions from "./potionContainer/Potions"
 
 const PotionContainer = ({potions, setPotions, students, setBrewPotion, setBrewPotionId}) => {
 

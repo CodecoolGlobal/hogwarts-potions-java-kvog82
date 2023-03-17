@@ -1,5 +1,5 @@
 import React from "react";
-import {POTIONS_STUDENT_URL} from "../constants/urls";
+import {POTIONS_STUDENT_URL} from "../../../constants/urls";
 
 const FilterPotions = ({students, inputs, setInputs, setPotions}) => {
     const handleFilter = async (event) => {

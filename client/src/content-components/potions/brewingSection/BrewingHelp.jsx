@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {GET_POTION_HELP_URL} from "../constants/urls";
+import {GET_POTION_HELP_URL} from "../../../constants/urls";
 import Recipes from "./Recipes";
 
 const BrewingHelp = ({potionId}) => {

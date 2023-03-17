@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import {POTIONS_URL} from "../constants/urls";
-import Ingredients from "./Ingredients";
+import {POTIONS_URL} from "../../../constants/urls";
+import Ingredients from "../Ingredients";
 import FilterPotions from "./FilterPotions";
 
-const Potions = ({ potions, setPotions, students, setBrewPotion, setBrewPotionId }) => {
+const
+    Potions = ({ potions, setPotions, students, setBrewPotion, setBrewPotionId }) => {
   const [inputs, setInputs] = useState({});
   const handleNewPotionClick = async (event) => {
     event.preventDefault();

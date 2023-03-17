@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ROOM_URL, ROOMS_URL} from "../constants/urls";
+import {ROOM_URL, ROOMS_URL} from "../../constants/urls";
 
 const RoomDeletionForm = ({rooms, setRooms, fetchData}) => {
     const [inputs, setInputs] = useState({});

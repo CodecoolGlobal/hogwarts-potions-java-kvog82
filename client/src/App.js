@@ -1,14 +1,14 @@
 import './App.css';
 import Header from './fixed-components/Header';
 import Footer from './fixed-components/Footer';
-import PotionContainer from './content-components/PotionContainer';
-import BrewingForm from './content-components/BrewingForm';
+import PotionContainer from './content-components/potions/PotionContainer';
+import BrewingForm from './content-components/potions/BrewingForm';
 import Sidebar from "./fixed-components/Sidebar";
 import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import {POTIONS_URL, STUDENTS_URL} from "./constants/urls";
-import HousesLeft from "./content-components/HousesLeft";
-import HousesRight from "./content-components/HousesRight";
+import HousesLeft from "./content-components/houses/HousesLeft";
+import HousesRight from "./content-components/houses/HousesRight";
 
 function App() {
   const [potions, setPotions] = useState([])

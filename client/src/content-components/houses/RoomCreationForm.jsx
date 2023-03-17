@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ROOMS_URL} from "../constants/urls";
+import {ROOMS_URL} from "../../constants/urls";
 
 const RoomCreationForm = ({rooms, setRooms}) => {
     const [inputs, setInputs] = useState({});

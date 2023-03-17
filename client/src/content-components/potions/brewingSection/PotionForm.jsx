@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {POTIONS_URL} from "../constants/urls";
+import {POTIONS_URL} from "../../../constants/urls";
 
 const PotionForm = ({potions, setPotions, students}) => {
     const [potion, setPotion] = useState({
