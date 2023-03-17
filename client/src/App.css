@@ -151,3 +151,8 @@ background-color: #28284485;
 .recipe-link {
   float: right;
 }
+
+.houses {
+  border-style: dashed;
+  border-color: blue;
+}

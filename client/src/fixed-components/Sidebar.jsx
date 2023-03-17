@@ -1,11 +1,15 @@
+import {Link} from "react-router-dom";
+
 const Sidebar = () => {
     return (
         <div className="box sidebar">
-            <button>Potions</button>
+            <Link to="/">Potions</Link>
+
             <br></br>
 
             <br></br>
-            <button>Houses</button>
+            <Link to="/houses">Houses</Link>
+
 
 
         </div>
