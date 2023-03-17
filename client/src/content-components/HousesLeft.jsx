@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-    GET_POTION_HELP_URL,
-    POTIONS_URL,
-    ROOM_URL,
-    ROOMS_AVAILABLE_URL, ROOMS_RAT_OWNERS_URL,
-    ROOMS_URL,
-    STUDENTS_URL
-} from "../constants/urls";
+import {ROOM_URL, ROOMS_URL} from "../constants/urls";
 import Room from "./Room";
 
 const HousesLeft = ({fetchData, rooms, setRooms}) => {
@@ -28,8 +21,6 @@ const HousesLeft = ({fetchData, rooms, setRooms}) => {
         const fetchedRoom = await fetchData(url)
         setRoom(fetchedRoom)
     }
-
-
 
     return (
         <div className="content-left">

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ADD_INGREDIENT_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
 import BrewingHelp from "./BrewingHelp";
@@ -13,8 +13,6 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
       setBrewPotion(null)
       setBrewPotionId(0)
     }
-    // console.log(brewPotion)
-    // console.log(brewPotion.brewingStatus)
   }
 
   const handleChange = (event) => {
@@ -54,10 +52,9 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
 
   return (
     <div className="box content-right">
-        <h4>Brewing Section</h4>
-        <div className="potion">
+      <h4>Brewing Section</h4>
+      <div className="potion">
         {brewPotionId === 0 ?
-
             <PotionForm potions={potions} setPotions={setPotions} students={students} />
             :
             <div >
@@ -76,19 +73,12 @@ const BrewingForm = ({potions, setPotions, students, brewPotion, setBrewPotion, 
               <button onClick={stopBrewing}>Stop brewing</button>
               </div>
             </div>
-
         }
-        </div>
-
+      </div>
       {!ingredients ? " " : <Ingredients ingredients={ingredients} />}
-
       {ingredients && ingredients.length > 0 ? <BrewingHelp potionId={brewPotionId} /> : ""}
-
     </div>
   )
-
-
-  }
-
+}
 
 export default BrewingForm

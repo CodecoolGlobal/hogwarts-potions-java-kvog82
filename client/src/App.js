@@ -26,7 +26,6 @@ function App() {
       const studentsFetched = await fetchData(STUDENTS_URL)
       setStudents(studentsFetched)
     }
-
     getPotions()
     getStudents()
   }, [])
@@ -44,14 +43,13 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<>
-          <PotionContainer potions={potions} setPotions={setPotions} students={students} brewPotion={brewPotion} setBrewPotion={setBrewPotion} brewPotionId={brewPotionId} setBrewPotionId={setBrewPotionId} />
+          <PotionContainer potions={potions} setPotions={setPotions} students={students} setBrewPotion={setBrewPotion} setBrewPotionId={setBrewPotionId} />
           <BrewingForm potions={potions} setPotions={setPotions} students={students} brewPotion={brewPotion} setBrewPotion={setBrewPotion} brewPotionId={brewPotionId} setBrewPotionId={setBrewPotionId} /></>}
         />
         <Route path="/houses" element={<>
           <HousesLeft fetchData={fetchData} rooms={rooms} setRooms={setRooms} />
           <HousesRight fetchData={fetchData} rooms={rooms} setRooms={setRooms} /></>}
         />
-
       </Routes>
       <Footer />
       </div>

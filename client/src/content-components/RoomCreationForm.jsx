@@ -18,11 +18,8 @@ const RoomCreationForm = ({rooms, setRooms}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(rooms)
         const lastRoom = rooms[rooms.length -1]
         const lastRoomNumber = lastRoom.number
-        console.log(lastRoomNumber)
-
         const newRoom = {
             house: inputs.house,
             number: lastRoomNumber+1,

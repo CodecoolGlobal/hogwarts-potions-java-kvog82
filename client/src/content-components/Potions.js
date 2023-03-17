@@ -1,11 +1,10 @@
-import RecipeContainer from "./BrewingForm";
 import React from "react";
 import { useState } from "react";
-import {ADD_INGREDIENT_URL, POTIONS_URL} from "../constants/urls";
+import {POTIONS_URL} from "../constants/urls";
 import Ingredients from "./Ingredients";
 import FilterPotions from "./FilterPotions";
 
-const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, brewPotionId, setBrewPotionId }) => {
+const Potions = ({ potions, setPotions, students, setBrewPotion, setBrewPotionId }) => {
   const [inputs, setInputs] = useState({});
   const handleNewPotionClick = async (event) => {
     event.preventDefault();
@@ -28,7 +27,6 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
     setBrewPotion(existingPotion)
   }
 
-
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -43,14 +41,13 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
     };
     const response = await fetch(POTIONS_URL + "/brew", requestOptions)
     const data = await response.json()
-
     return data
   }
 
 
   return (
     <>
-      <FilterPotions students={students} inputs={inputs} setInputs={setInputs} potions={potions} setPotions={setPotions} />
+      <FilterPotions students={students} inputs={inputs} setInputs={setInputs} setPotions={setPotions} />
       <div className="potion">
        Start brewing a new potion.
         <label>Select Student:
@@ -64,9 +61,7 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
           </select>
           <button value={inputs.studentId} onClick={handleNewPotionClick}>Start Brewing</button>
         </label>
-
       </div>
-
       {potions.map((potion) => (
         <div className="potion" key={potion.id}>
           <span className="potion-headline">
@@ -79,8 +74,6 @@ const Potions = ({ potions, setPotions, students, brewPotion, setBrewPotion, bre
           Brewed by: {potion.brewingStudent.name} <br></br>
           {(potion.recipe ? ('Recipe: ' + potion.recipe.name) : '')}
           <Ingredients ingredients={potion.ingredients} />
-
-
         </div>
       ))}
     </>

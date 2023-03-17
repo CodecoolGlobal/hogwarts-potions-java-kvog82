@@ -24,7 +24,6 @@ const HousesRight = ({fetchData, rooms, setRooms}) => {
             <button value="rat-owners" onClick={handleFilter}>Show rooms for rat owners</button>
             <RoomCreationForm rooms={rooms} setRooms={setRooms} />
             <RoomDeletionForm rooms={rooms} setRooms={setRooms} fetchData={fetchData}/>
-
         </div>
     )
 }

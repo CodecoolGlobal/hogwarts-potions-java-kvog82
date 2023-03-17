@@ -1,7 +1,7 @@
 import React from "react";
-import {POTIONS_URL} from "../constants/urls";
+import {POTIONS_STUDENT_URL} from "../constants/urls";
 
-const FilterPotions = ({students, inputs, setInputs, potions, setPotions}) => {
+const FilterPotions = ({students, inputs, setInputs, setPotions}) => {
     const handleFilter = async (event) => {
         event.preventDefault();
         let fetchedPotions = await getStudentPotions(event.target.value);
@@ -9,7 +9,7 @@ const FilterPotions = ({students, inputs, setInputs, potions, setPotions}) => {
     }
 
     const getStudentPotions = async (id) => {
-        let url = POTIONS_URL + "/" + id;
+        const url = POTIONS_STUDENT_URL.replace("${studentId}", id);
         let response = await fetch(url)
         return await response.json()
     }

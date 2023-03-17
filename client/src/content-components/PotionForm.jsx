@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {POTIONS_URL} from "../constants/urls";
 
 const PotionForm = ({potions, setPotions, students}) => {
-    const [ingredients, setIngredients] = useState([])
     const [potion, setPotion] = useState({
         brewingStudentId : "",
         ingredients: []
@@ -18,18 +17,14 @@ const PotionForm = ({potions, setPotions, students}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const ingredientsList = Object.values(inputs)
             .filter((value, index) => index >= 1 && index <= 5)
             .map(name => ({ name }));
-
         const cleanedIngredients = ingredientsList.filter(ingredient => ingredient !== "");
-
         const newPotion = {
             brewingStudentId: inputs.brewingStudentId,
             ingredients: cleanedIngredients
         };
-
         try {
             const response = await fetch(POTIONS_URL, {
                 method: "POST",
@@ -38,7 +33,6 @@ const PotionForm = ({potions, setPotions, students}) => {
                 },
                 body: JSON.stringify(newPotion),
             });
-
             const savedPotion = await response.json();
             setPotion(savedPotion);
             setPotions([...potions, savedPotion]);
@@ -46,11 +40,7 @@ const PotionForm = ({potions, setPotions, students}) => {
         } catch (err) {
             console.log(err);
         }
-
     };
-
-
-
 
       return (
         <div>
