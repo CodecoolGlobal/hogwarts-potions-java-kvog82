@@ -51,9 +51,7 @@ const HousesLeft = ({fetchData, rooms, setRooms}) => {
                 <tr>
                     <th>House</th>
                     <th>Rooms</th>
-                    <th>
-
-                    </th>
+                    <th>Room Students (click on room)</th>
                 </tr>
                 <tr>
                     <td>Gryffindor</td>
