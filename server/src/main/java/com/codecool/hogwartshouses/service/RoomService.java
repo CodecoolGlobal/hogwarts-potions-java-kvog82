@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,15 +24,15 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
-    public Room findById(Long id) {
-        return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
+    public Optional<Room> findById(long id) {
+        return roomRepository.findById(id);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(long id) {
         roomRepository.deleteById(id);
     }
 
-    public Room update(Long id, Room newRoom) {
+    public Room update(long id, Room newRoom) {
         return roomRepository.findById(id).map(room -> {
             room.setNumber(newRoom.getNumber());
             room.setHouse(newRoom.getHouse());

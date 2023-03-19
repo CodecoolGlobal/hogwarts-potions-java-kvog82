@@ -2,6 +2,7 @@ package com.codecool.hogwartshouses.api;
 
 import com.codecool.hogwartshouses.persistence.entity.Room;
 import com.codecool.hogwartshouses.service.RoomService;
+import com.codecool.hogwartshouses.service.exception.RoomNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class RoomController {
 
     @GetMapping("/{id}")
     Room findRoom(@PathVariable Long id) {
-        return roomService.findById(id);
+        return roomService.findById(id).orElseThrow((() -> new RoomNotFoundException(id)));
     }
 
     @PutMapping("/{id}")

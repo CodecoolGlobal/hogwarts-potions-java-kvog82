@@ -29,5 +29,9 @@ public class Room {
     @OneToMany
     private List<Student> students;
 
-
+    public Room(int number, House house, List<Student> students) {
+        this.number = number;
+        this.house = house;
+        this.students = students;
+    }
 }
