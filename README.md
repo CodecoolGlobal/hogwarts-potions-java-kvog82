@@ -12,8 +12,6 @@ before.
 
 ## How to run this application
 
-## Run locally
-
 Open Terminal and clone the project
 ```ssh
 git clone git@github.com:CodecoolGlobal/hogwarts-potions-java-kvog82.git
