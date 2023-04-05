@@ -114,3 +114,11 @@ $npm start
   }
 ```
 - DELETE http://localhost:8080/rooms/24 - Delete room
+
+## Screenshots
+Potions
+![hogwarts-potions_01_potions](https://user-images.githubusercontent.com/102434853/230030778-1806144e-b894-4db3-9013-88d0795f7adb.png)
+
+Students
+![hogwarts-potions_02_students](https://user-images.githubusercontent.com/102434853/230030878-ff615ea5-7617-49c6-8d4d-c954baa5208d.png)
+
